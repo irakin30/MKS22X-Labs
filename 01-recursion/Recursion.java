@@ -85,6 +85,20 @@ public class Recursion {
           */
           public static double sqrt(double n){
             //Hint: This is a wrapper method.
+            return sqrt(n, 1);
+          }
+
+          public static double sqrt(double n, double guess) {
+              if(percentDiff(n, guess * guess) > 0.00001) {
+                 ans = sqrt(n, guess);
+              }
+              else {
+                  return guess;
+              }
+          }
+
+          public static double percentDiff(double a, double b) {
+            return ((a - b) / a) * 100;
           }
 
           /*
@@ -93,22 +107,34 @@ public class Recursion {
           *@return the number of words that have no adjacent matching letters using the letters a-z.
           *Repetition allowed except when letters are adjacent.
           */
-          public static long countNoDoubleLetterWords(int length,String word){
+          //public static long countNoDoubleLetterWords(int length,String word){
             //Hint: not a wrapper method, but you must call it starting with "" as your word.
-          }
+          //}
 
 
          /*
           *@param n any non-negative value
           *@return the nth term of the fibonacci sequence. 0, 1, 1, 2, 3, 5 etc.
           */
-          public int fibIter(int n, int f1, int f2){
+          //public int fibIter(int n, int f1, int f2){
             //DO NOT call fibIter more than once
-          }
-          
+          //}
+
           //  Testing purposes only
           public static void main(String args[]) {
-              printAllWords(3);
+            /*
+              String[] b = {"abc", "123", "beep", "dog"};
+              for(String a: b) {
+                System.out.println(reverse(a));
+              }
+              // reverse Status: Working
+            */
+
+            double[] b = {100.0, 81.0, 64.0, 49.0};
+            for (double a : b) {
+              System.out.println(sqrt(a));
+            }
+
           }
 
 }
