@@ -92,12 +92,14 @@ public class Recursion {
               if (percentDiff(guess * guess, n) <= 0.0001) {
                 return guess; 
               }
-              guess = ( n / guess + guess) / 2; 
+              guess = (n / guess + guess) / 2; 
               return sqrt(n, guess); 
               
           }
 
           public static double percentDiff(double a, double b) {
+            //Hopefully a isn't 0, but if it is, cry on the inside; 
+            
             return Math.abs((b - a) / a) * 100;
           }
 
