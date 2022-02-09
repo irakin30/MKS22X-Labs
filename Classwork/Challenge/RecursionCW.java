@@ -20,6 +20,17 @@ public class RecursionCW {
         return splitArray(nums, start + 1, sumA + nums[start], sumB ) || splitArray(nums, start + 1, sumA , sumB + nums[start]);
     }
 
+    public boolean split53(int[] nums) {
+      return split53(nums, 0, 0, 0);
+    }
+
+    public boolean split53(int[] nums, int start, int sumA, int sumB) {
+        if (start == nums.length) return sumA == sumB;
+        if (nums[start] % 5 == 0) return split53(nums, start + 1, sumA + nums[start], sumB);
+        if (nums[start] % 3 == 0) return split53(nums, start + 1, sumA , sumB + nums[start]);
+        return split53(nums, start + 1, sumA + nums[start], sumB ) || split53(nums, start + 1, sumA , sumB + nums[start]);
+    }
+
     public static void main(String[] args) {
         System.out.println("\ngroupSum Testing");
         int[] testA = {2,4,8};
