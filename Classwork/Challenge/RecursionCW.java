@@ -40,8 +40,29 @@ public class RecursionCW {
     }
 
     public static boolean splitOdd10(int[] nums) {
-
+        //do stuff later
+        return false; 
     }
+
+    public boolean groupSum5(int start, int[] nums, int target) {
+        //base case
+		if (start >= nums.length) return target == 0;
+
+		if (nums[start] % 5 == 0) {
+            //if it's followed by one, check this.
+			if (start < nums.length - 1 && nums[start + 1] == 1) {
+                return groupSum5(start + 2, nums, target - nums[start]);
+            }
+            //standard recursive case otherwise
+            else {
+                return groupSum5(start + 1, nums, target - nums[start]);
+            }
+		}
+
+        //standard recursive case
+		return groupSum5(start + 1, nums, target - nums[start]) || 
+               groupSum5(start + 1, nums, target);
+    }  
 
     public static void main(String[] args) {
         System.out.println("\ngroupSum Testing");
