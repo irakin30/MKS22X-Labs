@@ -33,17 +33,10 @@ public class RecursionCW {
         return split53(nums, start + 1, sumA + nums[start], sumB ) || split53(nums, start + 1, sumA , sumB + nums[start]);
     }
 
-    //groupSum6(0, [5, 2, 4, 6], 9) → false
-    //fails groupSum6(0, [1, 6, 2, 6, 4], 9) → false
-    //fails groupSum6(0, [3, 2, 4, 6], 3) → false
-    public static boolean groupSum6(int start, int[] nums, int target) {
-        if (target == 0) return true;
-        if (start < nums.length && target > 0) {
-            //6 must be chosen, therefore the if statement
-            if (nums[start] == 6) return groupSum6(start + 1, nums, target - nums[start]) ;
-            return groupSum6(start + 1, nums, target - nums[start]) || groupSum6(start + 1, nums, target);
-        }
-        return false;
+    public boolean groupSum6(int start, int[] nums, int target) {
+        if (start >= nums.length) return target == 0;
+        if (nums[start] == 6) return groupSum6(start + 1, nums, target - nums[start]);
+        return groupSum6(start + 1, nums, target - nums[start]) || groupSum6(start + 1, nums, target);
     }
 
     public static boolean splitOdd10(int[] nums) {
