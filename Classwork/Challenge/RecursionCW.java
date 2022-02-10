@@ -40,8 +40,12 @@ public class RecursionCW {
     }
 
     public static boolean splitOdd10(int[] nums) {
-        //do stuff later
-        return false; 
+        return splitOdd10(nums, 0, 0, 0); 
+    }
+     
+    public static boolean splitOdd10(int[] nums, int start, int sumA, int sumB) {
+        if (start >= nums.length) return (sumA  % 10 == 0) && (sumB % 2 == 1); 
+        return splitOdd10(nums, start + 1, sumA + nums[start], sumB) || splitOdd10(nums, start + 1, sumA, sumB + nums[start]);
     }
 
     public boolean groupSum5(int start, int[] nums, int target) {
