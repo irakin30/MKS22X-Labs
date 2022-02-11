@@ -68,25 +68,20 @@ public class RecursionCW {
                groupSum5(start + 1, nums, target);
     }  
 
-    public boolean groupNoAdj(int start, int[] nums, int target) {
+    public static boolean groupNoAdj(int start, int[] nums, int target) {
         if (start >= nums.length) return target == 0;
         return groupNoAdj(start + 2, nums, target - nums[start]) ||
                groupNoAdj(start + 1, nums, target);
+    } 
+
+    public static boolean groupSumClump(int start, int[] nums, int target) {
+        if (start >= nums.length) return target == 0; 
+        int sum = nums[start]; 
+        int newIndex = start + 1; 
+        while (newIndex < nums.length && nums[newIndex] == nums[start]) {
+            sum += nums[newIndex++];
+        }
+        return groupSumClump(newIndex, nums, target - sum) || groupSumClump(newIndex, nums, target);
     }
 
-    public static void main(String[] args) {
-        System.out.println("\ngroupSum Testing");
-        int[] testA = {2,4,8};
-        System.out.println(groupSum(testA, 10)); //true
-        System.out.println(groupSum(testA, 14)); //true
-        System.out.println(groupSum(testA, 9)); //false
-        int[] testB = {2,3,7,10};
-        System.out.println(groupSum(testB, 9)); //true
-
-        System.out.println("\nSplitArray Testing");
-        System.out.println(splitArray(new int[] {2, 2})); //true
-        System.out.println(splitArray(new int[] {2, 3})); //false
-        System.out.println(splitArray(new int[] {5, 2, 3})); //true
-        System.out.println(splitArray(new int[] {10, 2, 3, 1})); //false
-    }
 }
