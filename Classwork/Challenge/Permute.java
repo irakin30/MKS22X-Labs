@@ -5,8 +5,10 @@ public class Permute {
     // base case should print the sentence
     public static void permute(String[][] lists, String sentence, int current) {
         if (current >= lists.length) System.out.println(sentence + "."); 
-        for(String thing : lists[current]) {
-            permute(lists, sentence + " " + thing, current + 1); 
+        else {
+            for (String thing : lists[current]) {
+                permute(lists, sentence + " " + thing, current + 1);
+            }
         }
     }
 
