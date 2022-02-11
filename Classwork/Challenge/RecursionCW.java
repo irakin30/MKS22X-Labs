@@ -68,6 +68,12 @@ public class RecursionCW {
                groupSum5(start + 1, nums, target);
     }  
 
+    public boolean groupNoAdj(int start, int[] nums, int target) {
+        if (start >= nums.length) return target == 0;
+        return groupNoAdj(start + 2, nums, target - nums[start]) ||
+               groupNoAdj(start + 1, nums, target);
+    }
+
     public static void main(String[] args) {
         System.out.println("\ngroupSum Testing");
         int[] testA = {2,4,8};
