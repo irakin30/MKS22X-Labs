@@ -36,6 +36,25 @@ public class QueenBoard{
     return ans;
   }
 
+  public String toStringDebug() {
+    String ans = "";
+    for(int i = 0; i < board.length; i++) {
+      for(int j = 0; j < board[i].length; j++) {
+        if (board[i][j] == -1) {
+          ans += "Q";
+        }
+        else if (board[i][j] == 0) {
+          ans += "_";
+        }
+        else{
+          ans += board[i][j];
+        }
+        ans += " ";
+      }
+      ans += "\n";
+    }
+    return ans;
+  }
   /**
   *@return true when the queen added correctly, false Otherwise
   *@precondition r and c are valid indices of the board array
@@ -43,7 +62,7 @@ public class QueenBoard{
   * in which case the queen is added and all it's threatened positions are incremented
   */
 
-  private boolean addQueen(int r, int c){
+  public boolean addQueen(int r, int c){
     //check if space is valid
     if(board[r][c] != 0) return false;
 
