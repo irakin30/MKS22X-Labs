@@ -2,6 +2,13 @@ public class QueenBoard{
   //member variables
   private int[][] board;
 
+  public QueenBoard() {
+    board = new int[8][8];
+  }
+
+  public QueenBoard(int n) {
+    board  = new int[n][n];
+  }
   /**
   *@return The output string formatted as follows:
   *All numbers that represent queens are replaced with 'Q'
@@ -17,13 +24,14 @@ public class QueenBoard{
   public String toString(){
     String ans = "";
     for(int i = 0; i < board.length; i++) {
-      if (i != 0) ans += "\n"; 
       for(int j = 0; j < board[i].length; j++) {
-        if (board[i][x] == -1) ans += "Q";
+        if (board[i][j] == -1) ans += "Q";
         else {
           ans += "_";
         }
+        ans += " ";
       }
+      ans += "\n";
     }
     return ans;
   }
@@ -36,7 +44,28 @@ public class QueenBoard{
   */
 
   private boolean addQueen(int r, int c){
+    //check if space is valid
+    if(board[r][c] != 0) return false;
 
+    board[r][c] = -1;
+
+    for(int i = 0; i < board.length; i++) {
+      //right diagonal
+      for(int j = c; i < board[c].length; j++) {
+        board[i][j] += 1;
+      }
+
+      //left diagonal
+      for(int j = c; i > 0; j--) {
+        board[i][j] += 1;
+      }
+
+      //vertical
+      board[i][c] += 1;
+
+      //we don't care about the other 5 directions because of the algorithm
+    }
+    return true;
   }
 
   /**Remove the queen that was added to r,c
@@ -59,12 +88,12 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you solved a 2nd time.)
   */
 
-  public boolean solve(){}
+  //public boolean solve(){}
 
   /**Find all possible solutions to this size board.
   *@return the number of solutions found, and leaves the board filled with only 0's
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you ran solve() before this method)
   */
 
-  public int countSolutions(){}
+  //public int countSolutions(){}
 }
