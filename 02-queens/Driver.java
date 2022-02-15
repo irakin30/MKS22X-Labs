@@ -30,5 +30,4 @@ public class Driver{
     // }
     System.out.println(Text.CLEAR_SCREEN); 
     a.solveDebug();
-  }
 }
