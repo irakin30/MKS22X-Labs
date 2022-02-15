@@ -133,12 +133,8 @@ public class QueenBoard{
     }
   }
 
-  public boolean solveDebug() throws IllegalStateException{
-      for(int[] a : board) {
-          for(int b : a) {
-            if (b != 0) throw new IllegalStateException("Board is not empty");
-          }
-      }
+  public boolean solveDebug() {
+      isEmpty();
       return solve(0, true);
   }
 
@@ -176,5 +172,8 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you ran solve() before this method)
   */
 
-  //public int countSolutions(){}
+  public int countSolutions(){
+    isEmpty();
+    return countSolutions(int row);
+  }
 }
