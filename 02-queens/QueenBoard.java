@@ -3,7 +3,7 @@ public class QueenBoard{
   private int[][] board;
 
   public QueenBoard() {
-    board = new int[8][8];
+    this(8);
   }
 
   public QueenBoard(int n) {
@@ -64,21 +64,21 @@ public class QueenBoard{
 
   public boolean addQueen(int r, int c){
     //check if space is valid
-    if (r >= board.length || c >= board[r].length) return false; 
+    if (r >= board.length || c >= board[r].length) return false;
     if(board[r][c] != 0) return false;
 
     //place queen
-    board[r][c] = -1; 
-    r++; 
+    board[r][c] = -1;
+    r++;
 
-    int ld = c - 1; 
-    int rd = c + 1; 
-    while(r < board.length) {  
-      board[r][c] += 1; 
-      if (ld >= 0) board[r][ld--] += 1; 
-      if(rd < board[r].length) board[r][rd++] += 1; 
+    int ld = c - 1;
+    int rd = c + 1;
+    while(r < board.length) {
+      board[r][c] += 1;
+      if (ld >= 0) board[r][ld--] += 1;
+      if(rd < board[r].length) board[r][rd++] += 1;
       r++;
-    } 
+    }
     return true;
   }
 
@@ -89,9 +89,9 @@ public class QueenBoard{
   */
 
   public void removeQueen(int r, int c){
-    //check if coordinates are valid 
+    //check if coordinates are valid
     if (r >= board.length || c >= board[r].length) return;
-    if (board[r][c] != -1) return; 
+    if (board[r][c] != -1) return;
 
     board[r][c] = 0;
     r++;
@@ -120,7 +120,52 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you solved a 2nd time.)
   */
 
-  //public boolean solve(){}
+  public boolean solve() throws IllegalStateException{
+      for(int[] a : board) {
+          for(int b : a) {
+            if (b != 0) throw new IllegalStateException("Board is not empty");
+          }
+      }
+      return solve(0, false);
+  }
+
+  public boolean solveDebug() throws IllegalStateException{
+      for(int[] a : board) {
+          for(int b : a) {
+            if (b != 0) throw new IllegalStateException("Board is not empty");
+          }
+      }
+      return solve(0, true);
+  }
+
+
+  private boolean solve(int row, boolean debug) {
+      if (row == board.length) {
+        return true;
+      }
+      else {
+        for(int col = 0; col < board[row].length; col++) {
+          if(addQueen(row, col)) {
+
+            //debug stuff
+            if (debug) {
+              System.out.println(Text.go(1,1));
+              System.out.println(this);//can change this to your debug print as well
+              Text.wait(500);
+            }
+
+            if (solve(row + 1, debug)) {
+              return true;
+            }
+            else {
+              removeQueen(row, col);
+            }
+
+          }
+        }
+      return false;
+    }
+  }
 
   /**Find all possible solutions to this size board.
   *@return the number of solutions found, and leaves the board filled with only 0's
