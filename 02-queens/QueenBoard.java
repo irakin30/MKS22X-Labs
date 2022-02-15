@@ -64,26 +64,21 @@ public class QueenBoard{
 
   public boolean addQueen(int r, int c){
     //check if space is valid
+    if (r >= board.length || c >= board[r].length) return false; 
     if(board[r][c] != 0) return false;
 
-    board[r][c] = -1;
+    //place queen
+    board[r][c] = -1; 
+    r++; 
 
-    for(int i = 0; i < board.length; i++) {
-      //right diagonal
-      for(int j = c; i < board[c].length; j++) {
-        board[i][j] += 1;
-      }
-
-      //left diagonal
-      for(int j = c; i > 0; j--) {
-        board[i][j] += 1;
-      }
-
-      //vertical
-      board[i][c] += 1;
-
-      //we don't care about the other 5 directions because of the algorithm
-    }
+    int ld = c - 1; 
+    int rd = c + 1; 
+    while(r < board.length) {  
+      board[r][c] += 1; 
+      if (ld >= 0) board[r][ld--] += 1; 
+      if(rd < board[r].length) board[r][rd++] += 1; 
+      r++;
+    } 
     return true;
   }
 
@@ -93,7 +88,25 @@ public class QueenBoard{
   *threatened positions are decremented
   */
 
-  private void removeQueen(int r, int c){
+  public void removeQueen(int r, int c){
+    //check if coordinates are valid 
+    if (r >= board.length || c >= board[r].length) return;
+    if (board[r][c] != -1) return; 
+
+    board[r][c] = 0;
+    r++;
+
+    int ld = c - 1;
+    int rd = c + 1;
+    while (r < board.length) {
+      board[r][c] -= 1;
+      if (ld >= 0)
+        board[r][ld--] -= 1;
+      if (rd < board[r].length)
+        board[r][rd++] -= 1;
+      r++;
+    }
+
 
   }
 
