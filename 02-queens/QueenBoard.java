@@ -1,6 +1,9 @@
 public class QueenBoard{
   //member variables
   private int[][] board;
+  private boolean animated;
+  private int delay;
+
 
   public QueenBoard() {
     this(8);
@@ -8,6 +11,8 @@ public class QueenBoard{
 
   public QueenBoard(int n) {
     board  = new int[n][n];
+    animated = false;
+    delay = 1000;
   }
 
   /**
@@ -123,7 +128,15 @@ public class QueenBoard{
 
   public boolean solve() {
       isEmpty();
-      return solve(0, false);
+      return solve(0);
+  }
+
+  public void setAnimate(boolean b) {
+    animated = b;
+  }
+
+  public void setDelay(int n) {
+    delay = n;
   }
 
   private void isEmpty() throws IllegalStateException {
@@ -134,13 +147,7 @@ public class QueenBoard{
     }
   }
 
-  public boolean solveDebug() {
-      isEmpty();
-      return solve(0, true);
-  }
-
-
-  private boolean solve(int row, boolean debug) {
+  private boolean solve(int row) {
       if (row == board.length) {
         return true;
       }
@@ -148,14 +155,13 @@ public class QueenBoard{
         for(int col = 0; col < board[row].length; col++) {
           if(addQueen(row, col)) {
 
-            //debug stuff
-            if (debug) {
+            if (animated) {
               System.out.println(Text.go(1,1));
               System.out.println(this);//can change this to your debug print as well
-              Text.wait(500);
+              Text.wait(delay);
             }
 
-            if (solve(row + 1, debug)) {
+            if (solve(row + 1)) {
               return true;
             }
             else {
@@ -175,10 +181,30 @@ public class QueenBoard{
 
   public int countSolutions(){
     isEmpty();
-    return countSolutions(0, 0);
+    return countSolutions(0);
   }
 
-  private int countSolutions(int row, int solutions) {
-    
+  private int countSolutions(int row) {
+    if (row == board.length) {
+      int n = board.length;
+      board = new int[n][n];
+      return 1;
+    }
+    else {
+      for(int col = 0; col < board[row].length; col++) {
+        if(addQueen(row, col)) {
+          if (countSolutions(row + 1) > 0) {
+            return (row < board.length)? 1 + countSolutions(row + 1) : 1;
+          }
+          else {
+            removeQueen(row, col);
+          }
+        }
+      }
+    return 0;
+  }
+  }
+
+  public static void main(String[] args) {
   }
 }

@@ -1,6 +1,5 @@
 public class Driver{
   public static void main(String[] args) {
-    QueenBoard a = new QueenBoard();
     //System.out.println(a);
 
     // System.out.println("AddQueen Testing");
@@ -28,7 +27,11 @@ public class Driver{
     //     System.out.println(b.toStringDebug());
     //   }
     // }
-    System.out.println(a.countSolutions());
-    System.out.print(a); 
+    QueenBoard b = new QueenBoard();
+    int[] test = {1,2,3,4,5,6,7,8};
+    for(int a : test) {
+      b = new QueenBoard(a);
+      System.out.println(b.countSolutions());
+    }
   }
 }
