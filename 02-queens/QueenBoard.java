@@ -9,6 +9,7 @@ public class QueenBoard{
   public QueenBoard(int n) {
     board  = new int[n][n];
   }
+
   /**
   *@return The output string formatted as follows:
   *All numbers that represent queens are replaced with 'Q'
@@ -62,7 +63,7 @@ public class QueenBoard{
   * in which case the queen is added and all it's threatened positions are incremented
   */
 
-  public boolean addQueen(int r, int c){
+  private boolean addQueen(int r, int c){
     //check if space is valid
     if (r >= board.length || c >= board[r].length) return false;
     if(board[r][c] != 0) return false;
@@ -88,7 +89,7 @@ public class QueenBoard{
   *threatened positions are decremented
   */
 
-  public void removeQueen(int r, int c){
+  private void removeQueen(int r, int c){
     //check if coordinates are valid
     if (r >= board.length || c >= board[r].length) return;
     if (board[r][c] != -1) return;
@@ -174,6 +175,10 @@ public class QueenBoard{
 
   public int countSolutions(){
     isEmpty();
-    return countSolutions(int row);
+    return countSolutions(0, 0);
+  }
+
+  private int countSolutions(int row, int solutions) {
+    
   }
 }

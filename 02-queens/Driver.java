@@ -28,6 +28,7 @@ public class Driver{
     //     System.out.println(b.toStringDebug());
     //   }
     // }
-    System.out.println(Text.CLEAR_SCREEN); 
-    a.solveDebug();
+    System.out.println(a.countSolutions());
+    System.out.print(a); 
+  }
 }
