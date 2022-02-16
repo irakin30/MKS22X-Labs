@@ -194,7 +194,7 @@ public class QueenBoard{
       for(int col = 0; col < board[row].length; col++) {
         if(addQueen(row, col)) {
           if (countSolutions(row + 1) > 0) {
-            return (row < board.length)? 1 + countSolutions(row + 1) : 1;
+            return (row < board.length - 1)? 1 + countSolutions(row + 1) : 1;
           }
           else {
             removeQueen(row, col);
@@ -206,5 +206,6 @@ public class QueenBoard{
   }
 
   public static void main(String[] args) {
+    
   }
 }
