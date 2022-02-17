@@ -186,26 +186,17 @@ public class QueenBoard{
 
   private int countSolutions(int row) {
     if (row == board.length) {
-      int n = board.length;
-      board = new int[n][n];
       return 1;
     }
     else {
+      int solutions = 0;
       for(int col = 0; col < board[row].length; col++) {
         if(addQueen(row, col)) {
-          if (countSolutions(row + 1) > 0) {
-            return (row < board.length - 1)? 1 + countSolutions(row + 1) : 1;
-          }
-          else {
-            removeQueen(row, col);
-          }
+          solutions += countSolutions(row + 1);
+          removeQueen(row, col);
         }
       }
-    return 0;
-  }
-  }
-
-  public static void main(String[] args) {
-    
-  }
+      return solutions;
+      }
+    }
 }
