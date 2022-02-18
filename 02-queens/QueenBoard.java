@@ -68,7 +68,7 @@ public class QueenBoard{
   * in which case the queen is added and all it's threatened positions are incremented
   */
 
-  private boolean addQueen(int r, int c){
+  public boolean addQueen(int r, int c){
     //check if space is valid
     if (r >= board.length || c >= board[r].length) return false;
     if(board[r][c] != 0) return false;
@@ -87,14 +87,13 @@ public class QueenBoard{
     }
     return true;
   }
-
   /**Remove the queen that was added to r,c
   *@precondition r and c are valid indices of the board array and there is a queen at position r,c
   *@postcondition the board is modified to remove that queen and all it's
   *threatened positions are decremented
   */
 
-  private void removeQueen(int r, int c){
+  public void removeQueen(int r, int c){
     //check if coordinates are valid
     if (r >= board.length || c >= board[r].length) return;
     if (board[r][c] != -1) return;
@@ -112,8 +111,6 @@ public class QueenBoard{
         board[r][rd++] -= 1;
       r++;
     }
-
-
   }
 
   /**Find the first solution configuration possible for this size board. Start by placing
@@ -199,4 +196,5 @@ public class QueenBoard{
       return solutions;
       }
     }
+
 }
