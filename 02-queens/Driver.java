@@ -28,11 +28,13 @@ public class Driver{
         System.out.println(b.toStringDebug());
       }
     }
-    // QueenBoard b = new QueenBoard();
-    // int[] test = {1,2,3,4,5,6,7,8};
-    // for(int a : test) {
-    //   b = new QueenBoard(a);
-    //   System.out.println(b.countSolutions());
-    // }
+
+    System.out.println("countSolutions Testing");
+    QueenBoard y = new QueenBoard();
+    int[] test = {1,2,3,4,5,6,7,8};
+    for(int x : test) {
+      y = new QueenBoard(x);
+      System.out.println(y.countSolutions());
+    }
   }
 }

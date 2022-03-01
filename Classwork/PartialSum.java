@@ -1,3 +1,4 @@
+package Classwork; 
 public class PartialSum {
     public static boolean partialSum(int[] arr, int targetValue) {
         return partialSum(0, arr, targetValue); 

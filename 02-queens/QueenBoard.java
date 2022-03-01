@@ -178,7 +178,12 @@ public class QueenBoard{
 
   public int countSolutions(){
     isEmpty();
-    return countSolutions(0);
+    int solutions = countSolutions(0);
+    
+    //clears the board after it counts the solutions; 
+    int n = board.length; 
+    board = new int[n][n]; 
+    return solutions; 
   }
 
   private int countSolutions(int row) {
