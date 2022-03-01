@@ -10,14 +10,14 @@ public class Maze {
      * Constructor loads a maze text file, and sets animate to false by default.
      * When the file is not found then:
      * throw a FileNotFoundException
-     * 
+     *
      * You may assume the file contains a rectangular ascii maze, made with the
      * following 4 characters:
      * '#' - Walls - locations that cannot be moved onto
      * ' ' - Empty Space - locations that can be moved onto
      * 'E' - the location of the goal if any (0 or more per file)
      * 'S' - the location of the start(exactly 1 per file)
-     * 
+     *
      * You may also assume the maze has a border of '#' around the edges.
      * So you don't have to check for out of bounds!
      * Some text editors always include a newline at the end of a file, but that is
@@ -26,30 +26,30 @@ public class Maze {
      */
     public Maze(String filename) throws FileNotFoundException {
         // COMPLETE CONSTRUCTOR
-        animate = false; 
+        animate = false;
         try {
-            maze = toArray(filename); 
-            int[] temp = findStart(maze); 
-            startRow = temp[0]; 
-            startCol = temp[1]; 
+            maze = toArray(filename);
+            int[] temp = findStart(maze);
+            startRow = temp[0];
+            startCol = temp[1];
         }
         catch(FileNotFoundException e) {
-            throw new FileNotFoundException("File Not Found"); 
+            throw new FileNotFoundException("File Not Found");
         }
     }
 
     private int[] findStart(char[][] maze) {
-        int[] start = new int[2]; 
+        int[] start = new int[2];
         for(int row = 0; row < maze.length; row++) {
             for(int col = 0; col < maze[row].length; col++) {
                 if(maze[row][col] == 'S') {
-                    start[0] = row; 
-                    start[1] = col; 
-                    return start; 
+                    start[0] = row;
+                    start[1] = col;
+                    return start;
                 }
             }
         }
-        return start; 
+        return start;
     }
 
     private char[][] toArray(String fileName) throws FileNotFoundException {
@@ -72,7 +72,8 @@ public class Maze {
     private void wait(int millis) {
         try {
             Thread.sleep(millis);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
         }
     }
 
@@ -95,12 +96,12 @@ public class Maze {
      * It should look like the text file with some characters replaced.
      */
     public String toString() {
-        String mazeString = ""; 
+        String mazeString = "";
         for(char[] row : maze) {
             for(char col : row) {
                 mazeString += col + " ";
             }
-            mazeString += "\n"; 
+            mazeString += "\n";
         }
         return mazeString;
     }
@@ -123,12 +124,12 @@ public class Maze {
 
     /*
      * Recursive Solve function:
-     * 
+     *
      * A solved maze has a path marked with '@' from S to E.
-     * 
+     *
      * Returns the number of @ symbols from S to E when the maze is solved,
      * Returns -1 when the maze has no solution.
-     * 
+     *
      * Postcondition:
      * The 'S' is replaced with '@'
      * The 'E' remain the same
@@ -142,8 +143,14 @@ public class Maze {
             System.out.println(this);
             wait(50);
         }
+        char currentPosition = maze[row][col];
+        int[][] directions = {new int[]{0, 1}, new int{0, -1}, new int{1, 0}, new int{-1. 0}}
+        if (currentPostion == 'E') return 1;
+        else {
+            if currentPosition
+        }
 
-        // COMPLETE SOLVE
+
         return -1; // so it compiles
     }
 }
