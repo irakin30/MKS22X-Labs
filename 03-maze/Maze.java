@@ -5,6 +5,7 @@ public class Maze {
     private char[][] maze;
     private boolean animate;// false by default
     private int startRow, startCol;
+    private int[][] directions; 
 
     /*
      * Constructor loads a maze text file, and sets animate to false by default.
@@ -24,25 +25,28 @@ public class Maze {
      * not always present.
      * Make sure your file reading is able to handle this.
      */
+
     public Maze(String filename) throws FileNotFoundException {
         // COMPLETE CONSTRUCTOR
         animate = false;
         try {
             maze = toArray(filename);
-            int[] temp = findStart(maze);
+            int[] temp = findCoords('S');
             startRow = temp[0];
             startCol = temp[1];
+            temp = findCoords('E');
+            directions = new int[][] {new int[] {1, 0}, new int[] {-1, 0}, new int[] {0, -1}, new int[] {0, 1}}; 
         }
         catch(FileNotFoundException e) {
             throw new FileNotFoundException("File Not Found");
         }
     }
 
-    private int[] findStart(char[][] maze) {
+    private int[] findCoords(char target) {
         int[] start = new int[2];
         for(int row = 0; row < maze.length; row++) {
             for(int col = 0; col < maze[row].length; col++) {
-                if(maze[row][col] == 'S') {
+                if(maze[row][col] == target) {
                     start[0] = row;
                     start[1] = col;
                     return start;
@@ -136,6 +140,7 @@ public class Maze {
      * All visited spots that were not part of the solution are changed to '.'
      * All visited spots that are part of the solution are changed to '@'
      */
+
     private int solve(int row, int col) { // you can add more parameters since this is private
         // automatic animation! You are welcome.
         if (animate) {
@@ -143,14 +148,30 @@ public class Maze {
             System.out.println(this);
             wait(50);
         }
-        char currentPosition = maze[row][col];
-        int[][] directions = {new int[]{0, 1}, new int{0, -1}, new int{1, 0}, new int{-1. 0}}
-        if (currentPostion == 'E') return 1;
-        else {
-            if currentPosition
+        
+        if(maze[row][col] == 'E') {
+            return 0;
         }
+        else if (!isValid(row, col)) {
+            return -1; 
+        }
+        else {
+            maze[row][col] = '@';
+            for(int[] dir : directions) {
+                int d = solve(row + dir[0], col + dir[1]); 
+                if (d > -1) {
+                    return d + 1; 
+                }
+            }
+            maze[row][col] = '.';
+            return -1; // so it compiles
+        }
+       
+    }
 
-
-        return -1; // so it compiles
+    private boolean isValid(int row, int col) {
+        return (row >= 1 && row < maze.length - 1) 
+                && (col >= 1 && col < maze[row].length - 1) 
+                && (maze[row][col] != '#' && maze[row][col]  != '@' && maze[row][col] != '.');
     }
 }
