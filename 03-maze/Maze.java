@@ -110,6 +110,16 @@ public class Maze {
         return mazeString;
     }
 
+    public static String mazeToString(char[][] maze) {
+        String mazeString = "";
+        for (char[] row : maze) {
+            for (char col : row) {
+                mazeString += col + " ";
+            }
+            mazeString += "\n";
+        }
+        return mazeString;
+    }
     /*
      * Wrapper Solve Function returns the helper function
      * Note the helper function has the same name, but different parameters.
@@ -146,7 +156,7 @@ public class Maze {
         if (animate) {
             gotoTop();
             System.out.println(this);
-            wait(50);
+            wait(250);
         }
         
         if(maze[row][col] == 'E') {
@@ -175,3 +185,16 @@ public class Maze {
                 && (maze[row][col] != '#' && maze[row][col]  != '@' && maze[row][col] != '.');
     }
 }
+
+/*
+ * if (solve(row + 1, col) != -1) {}
+ * return 1 + solve(row + 1, col);
+ * }
+ * if (solve(row - 1, col) != -1) {}
+ * return 1 + solve(row + 1, col);
+ * if (solve(row - 1, col) != -1) {}
+ * return 1 + solve(row + 1, col);
+ * if (solve(row - 1, col) != -1) {}
+ * return 1 + solve(row + 1, col);
+ * }
+ */
