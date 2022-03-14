@@ -114,7 +114,7 @@ public class Maze {
         String mazeString = "";
         for (char[] row : maze) {
             for (char col : row) {
-                mazeString += col + " ";
+                mazeString += col;
             }
             mazeString += "\n";
         }
