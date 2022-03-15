@@ -1,4 +1,3 @@
-import java.util.Random;
 public class Preliminary{
     /**
      * * Modify the dataay such that:
