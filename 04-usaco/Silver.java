@@ -6,7 +6,6 @@ public class Silver {
     private static final int[][] directions = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} }; 
     private static int N, M, T; 
     private static int R1, C1, R2, C2; 
-    
 
     private static void readFile(String fileName) throws FileNotFoundException{
         Scanner input = new Scanner(new File(fileName)); 
@@ -55,7 +54,8 @@ public class Silver {
         try {
           readFile(fileName);
           current[R1][C1] = 1; 
-          for (int i = 1; i <= T; i++) {
+          for (int i = 1; i < T; i++) {
+
               iterate(); 
           }
           return current[R2][C2]; 
@@ -97,12 +97,19 @@ public class Silver {
     }
 
     public static void main(String[] args) {
-        System.out.println(solve(args[0]));
-        for(int[] row : current) {
-            for(int col : row) {
-                System.out.print(col + " "); 
+        try {
+            readFile(args[0]);
+            current[R1][C1] = 1;
+            iterate(); 
+            for(int[] row : current) {
+                for(int col : row) {
+                    System.out.print(col + " "); 
+                }
+                System.out.print("\n"); 
             }
-            System.out.print("\n"); 
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

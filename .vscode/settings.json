@@ -1,6 +1,7 @@
 {
     "java.project.sourcePaths": [
+        "03-maze",
         "01-recursion",
-        "03-maze"
+        "05-quick"
     ]
 }
