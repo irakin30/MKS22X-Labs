@@ -31,8 +31,11 @@ public class Quick{
         return i + 1;
     }
 
-    public static int partition_H(int[] data, int high, int low) {
-        return 0; 
+    public static int partition_c(int[] data, int start, int end) {
+        int pivot = ((int) (Math.random() * (end - start))) + start;
+        swap(data, pivot, start);
+        pivot = data[pivot]; 
+        return -1;
     }
 
     private static void swap(int[] data, int indexA, int indexB) {
@@ -41,19 +44,11 @@ public class Quick{
         data[indexB] = temp;
     }
 
-    private static void printArray(int[] data) {
-        System.out.print("[ ");
-        for(int e : data) {
-            System.out.print(e + " ");
-        }
-        System.out.println("]");
-    }
-
     private static void test(int[] data, int start, int end) {
       System.out.println("Original: "+ Arrays.toString(data));
       int pivot = partition(data, 0, 4);
       System.out.println("Pivot value: "+data[pivot]+ ", Pivot index: "+pivot);
-      System.out.println("Modified: "+Arrays.toString(data));
+      System.out.println("Modified: "+ Arrays.toString(data));
       System.out.println();
     }
 
@@ -113,7 +108,7 @@ public class Quick{
 
    public static void main(String[] args) {
       for(int i = 0; i < 100; i++) {
-          int[] sortA = randArray(1000000); 
+          int[] sortA = randArray(10); 
           int[] sortB = sortA.clone();
           Arrays.sort(sortA);
           quicksort(sortB);
