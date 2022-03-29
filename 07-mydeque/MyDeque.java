@@ -19,13 +19,11 @@ public class MyDeque<E>{
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[initialCapacity];
     data = d;
-    size = 0;
-    start = data.length / 2; 
-    end = data.length - start; 
+    size = 0; 
   }
 
   /**
-   * @return the amount of elements in the deque.
+   *  @return the amount of elements in the deque.
   */
   public int size(){
       return size;
@@ -55,54 +53,102 @@ public class MyDeque<E>{
   }
   
   private void resize() {
-    // + 2 is required for idiot-proofing and even numbers are nice
-      E[] newData = (E[]) new Object[(data.length * 2) + 2]; 
-     
+    // + 2 is required for idiot-proofing and even numbers are nice 
+    // because you can have an even number of space on both sides
+    @SuppressWarnings("unchecked")
+    E[] newData = (E[]) new Object[(data.length * 2) + 2]; 
+    int newStart = (data.length)/2 + 1; 
+    
+    //Wrapped around case
+    if(end < start) {
+        int j = newStart;
+        for(int i = start; start < data.length; i++, j++) {
+          newData[j] = data[i]; 
+        }
+        for(int i = 0; i < end; i++, j++) {
+          newData[j] = data[i]; 
+        }
+    }
+
+    //not Wrapped around case
+    else {
+      for(int i = 0; start < data.length; i++) {
+        newData[newStart + i] = data[i]; 
+      }
+    }
+
+    start = newStart; 
+    end = newStart + data.length; 
+    data = newData; 
   }
 
   /**
    * 
   */
-  public void addFirst(E element) throws NullPointerException{
-    if(element == null) throw new NullPointerException(); 
+  public void addFirst(E element) {
+    if(element == null) throw new NullPointerException();
+    if(size + 1 > data.length) resize(); 
+
+    if (start - 1 < 0) {
+      data[data.length - 1] = element;
+      start = data.length - 1;
+    }
+    else {
+      data[start - 1] = element;
+      start--;
+    }
   }
 
   /**
    * 
   */
-  public void addLast(E element) throws NullPointerException{
+  public void addLast(E element) {
     if(element == null) throw new NullPointerException(); 
+    if (size + 1 > data.length) resize();
+
+    if (end + 1 > data.length - 1) {
+      data[0] = element;
+      end = 0;
+    } 
+    else {
+      data[end + 1] = element;
+      end++;
+    }
   }
 
   /**
    * @return
+   * @throws
   */
-  public E removeFirst() throws NoSuchElementException{
+  public E removeFirst() {
       if (size == 0) throw new NoSuchElementException();
       E element = data[start]; 
       data[start] = null; 
+      start++;
       size--; 
       return element; 
   }
 
   /**
    * @return
+   * @throws
   */
-  public E removeLast() throws NoSuchElementException{
+  public E removeLast() {
     if (size == 0) throw new NoSuchElementException();
     E element = data[end];
     data[end] = null;
+    end--;
     size--;
     return element;
-
   }
 
   /**
    * Returns the first element in the deque without removing the element.
    * @return the first element of the deque
+   * @throws
   */
 
-  public E getFirst() throws NoSuchElementException{
+  public E getFirst() {
     if (size == 0) throw new NoSuchElementException(); 
     return data[start]; 
   }
@@ -110,10 +156,11 @@ public class MyDeque<E>{
   /**
    * Returns the last element in the deque without removing the element.
    * @return the last element of the deque
+   * @throws
   */
-  public E getLast() throws NoSuchElementException{
+
+  public E getLast() {
     if (size == 0) throw new NoSuchElementException(); 
     return data[end]; 
   }
-
 }
