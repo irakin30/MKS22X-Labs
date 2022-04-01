@@ -3,6 +3,7 @@
         "05-quick",
         "03-maze",
         "01-recursion",
-        "06-merge"
+        "06-merge",
+        "08-calculator"
     ]
 }

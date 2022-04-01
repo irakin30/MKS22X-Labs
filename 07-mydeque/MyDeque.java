@@ -5,21 +5,17 @@ public class MyDeque<E>{
   private int size;
   private int start, end;
 
-  /**
-   * 
-  */
   public MyDeque(){
     this(16); 
   }
 
-  /**
-   * 
-  */
   public MyDeque(int initialCapacity){
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[initialCapacity];
     data = d;
     size = 0; 
+    start = 0; 
+    end = 0;
   }
 
   /**
