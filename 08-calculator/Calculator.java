@@ -1,5 +1,4 @@
 import java.util.ArrayDeque;
-import java.util.Scanner;
 public class Calculator {
     /** 
      * Evaluate a postfix expression stored in s.
@@ -14,33 +13,37 @@ public class Calculator {
      * with +,- etc.
      */
     
-        public static double eval(String s) {
+    public static double eval(String s) {
+        if (s.trim().length() == 0) throw new IllegalArgumentException("too few operands"); // empty string
         ArrayDeque<Double> stack = new ArrayDeque<Double>();
         String[] stuff = s.split(" "); 
         for(String token : stuff) {
-            char op = token.charAt(0);
-            if(isOperator(op)) {
-                if (stack.size() < 2) throw new IllegalArgumentException("Too many operators");
-                double second = stack.pop();
-                double first = stack.pop(); 
-                switch(op) {
-                    case '*' :  stack.push(first * second);
-                                break;
-                    case '/' :  stack.push(first / second);
-                                break;
-                    case '-' :  stack.push(first - second);
-                                break;
-                    case '+' :  stack.push(first + second);
-                                break;
-                }
-            }
-            else {
+            try {
                 stack.push(Double.parseDouble(token));
             }
+            catch (NumberFormatException e) {
+                if (stack.size() < 2) throw new IllegalArgumentException("too few operands");
+                double second = stack.pop();
+                double first = stack.pop();
+                switch (token.charAt(0)) {
+                    case '*':
+                        stack.push(first * second);
+                        break;
+                    case '/':
+                        stack.push(first / second);
+                        break;
+                    case '-':
+                        stack.push(first - second);
+                        break;
+                    case '+':
+                        stack.push(first + second);
+                        break;
+                }
+            }
         }
-        if (stack.size() > 1) throw new IllegalArgumentException("Too many operands"); 
+        if (stack.size() > 1) throw new IllegalArgumentException("too many operands"); 
         return stack.getFirst(); 
-        }
+    }
 
 
 
