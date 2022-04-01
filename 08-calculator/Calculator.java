@@ -51,10 +51,9 @@ public class Calculator {
             System.out.println(eval(s)); 
         }
         System.out.println("Exception Testing"); 
-        eval("1 1 - - -"); 
-        eval ("1 + 3"); 
-        eval ("1 1 1 -"); 
-
+        // eval("1 1 - - -"); Tested Working
+        // eval ("1 + 3"); Tested Working
+        // eval ("1 1 1 -"); Tested Working
     }
 
     private static boolean isOperator(char a) {
