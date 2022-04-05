@@ -38,14 +38,15 @@ public class Calculator {
                     case '+':
                         stack.push(first + second);
                         break;
+                    case '%': 
+                        stack.push(first % second);
+                        break;
                 }
             }
         }
         if (stack.size() > 1) throw new IllegalArgumentException("too many operands"); 
         return stack.getFirst(); 
     }
-
-
 
     public static void main(String[] args) {
         String[] ktest = { "11 3 - 4 + 2.5 *", "10 2.0 +", "8 2 + 99 9 - * 2 + 9 -", "1 2 3 4 5 + * - -" }; 
@@ -57,10 +58,6 @@ public class Calculator {
         // eval("1 1 - - -"); Tested Working
         // eval ("1 + 3"); Tested Working
         // eval ("1 1 1 -"); Tested Working
-    }
-
-    private static boolean isOperator(char a) {
-        return (a == '*') || (a == '/') || (a == '+') || (a == '-');
     }
 }
 
