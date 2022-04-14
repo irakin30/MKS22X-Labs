@@ -9,14 +9,14 @@
   int SQUARESIZE;
 
   void setup() {
-    size(600, 500);
+    size(1200, 500);
     ROWS = 50;
-    COLS = 60;
+    COLS = 120;
     /**question 1 *********************************
      *At this point you have initialized width, height,ROWS,COLS. You can change these values
      *to alter the screen size, but you cannot just change one value!
      *What must be true about the ratio of these values in order for this simulation to display squares?
-     *ANSWER HERE:
+     *ANSWER HERE: The ratio of rows: columns must be the same as height:width. 
      */
 
     DENSITY = .61;
@@ -27,7 +27,7 @@
      *ANSWER : replace squareSize = 8; with the correct square size.
      * DO NOT just write a number, it must work when you change the size() command or the ROWS and COLS
      */
-    SQUARESIZE = 8;//side length
+    SQUARESIZE = height / ROWS;//side length
 
   }
 
@@ -45,7 +45,7 @@
      *(The print statement is NOT part of the simulation, it is to help you answer this question)
      *hint:  If you cannot figure this out analytically, experiment to test
      *       the difference by changing the code. A print statement is commented out to facilitate testing.
-     *ANSWER HERE:
+     *ANSWER HERE: 
      */
 
     String[]lines = treeSim.toString().split("\n");
@@ -70,7 +70,7 @@
      *Please use the same values that it was initialized with in the setup.
      * ANSWER: UPDATE THE NEXT LINE
      */
-    treeSim = null;
+    treeSim = new BurnTrees(ROWS, COLS, DENSITY);
   }
 
 
@@ -87,6 +87,22 @@
      *2. Decide how to fill them in using the String[] parameter
      *   Colors: Fire = RED, Tree = GREEN, SPACE = WHITE, ASH = GREY
      */
+     noStroke();
+     for(int i = 0; i < lines.length; i++) {
+       for(int j = 0; j < lines[i].length(); j++) {
+         switch(lines[i].charAt(j)) {
+           case '@': fill(0, 255, 0);
+               break;
+           case '.': fill(180);
+               break;
+           case 'w': fill(255, 0, 0);
+               break; 
+           case ' ': fill(255);
+               break;
+         }
+         rect(j * SQUARESIZE,i * SQUARESIZE, SQUARESIZE, SQUARESIZE);
+       }
+     }
 
   }
 
