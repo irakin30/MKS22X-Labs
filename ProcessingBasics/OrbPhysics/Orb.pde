@@ -44,10 +44,10 @@ public class Orb{
         
         //PART 3
         //Change the speed when you collide with the end of the screen (all 4 sides) 
-        if (x + xSpeed >= width - radius || x + xSpeed <= 0 + radius) {
+        if (x + xSpeed >= width - radius || x + xSpeed <= radius) {
            xSpeed *= -1; 
         }
-        if (y + ySpeed >= height - radius || y + ySpeed <= 0 + radius) {
+        if (y + ySpeed >= height - radius || y + ySpeed <= radius) {
            ySpeed *= -1; 
         }
         
@@ -63,5 +63,11 @@ public class Orb{
         //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
         
         ySpeed += 0.1; 
+      }
+      
+      void attract(Orb other) {
+        float G = 0.25f; 
+        other.xSpeed += G * (x - other.x) / dist(x, y, other.x, other.y); 
+        other.ySpeed += G * (y - other.y) / dist(x, y, other.x, other.y); 
       }
     }
