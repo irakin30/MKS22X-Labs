@@ -1,15 +1,20 @@
 ArrayList<Orb>orbList;
 Orb center; 
 int MODE; 
-int GRAVITY, ORBIT; 
+int GRAVITY, ORBIT, SPRING; 
+boolean backgroundMode; 
+boolean gravity; 
 
 void setup() {
   size(1000, 800);
+  GRAVITY = 0; 
+  ORBIT = 1;
+  SPRING = 2; 
+  backgroundMode = true; 
+  gravity = true; 
+  MODE = GRAVITY;
   orbList = new ArrayList<Orb>();
   center = new Orb(width/2, height/2, 0, 0, 5);
-  GRAVITY = 1; 
-  ORBIT = -1; 
-  MODE = GRAVITY;
 }
 
 void mouseClicked() {
@@ -22,16 +27,28 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if (key == ' ') {
-    MODE *= -1;
-  } 
   if (keyCode == BACKSPACE) { 
     orbList = new ArrayList<Orb>();
   }
+  switch(key) {
+  case ' ': 
+    MODE = (MODE < 2) ? MODE + 1 : 0; 
+    break; 
+  case 'g':
+    gravity = !gravity; 
+    break; 
+  case 'b':
+    backgroundMode = !backgroundMode; 
+    break;
+  }
 }
 
+
 void draw() {
-  background(255); 
+  if (backgroundMode) {
+    background(255);
+  }
+  drawText(); 
   center.display(); 
   for (Orb o : orbList) {
     if (MODE == ORBIT) {
@@ -40,6 +57,12 @@ void draw() {
     o.move();
     o.display();
   }
+} 
+
+void drawText() {
+  fill(255);
+  noStroke(); 
+  rect(0, 0, 175, 100); 
   fill(0);
   text("FrameRate: " + frameRate, 20, 20);
   text("Orbs: " + orbList.size(), 20, 40);
