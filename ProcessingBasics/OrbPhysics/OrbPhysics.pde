@@ -62,7 +62,13 @@ void draw() {
       center.attract(o);
     }
     if (MODE == SPRING) {
-      center.attractSpring(o);
+      center.attractSpring(o); 
+      if (lineMode) {
+        //if (MODE == SPRING) {
+        //  stroke(0, 0, 0, 120); 
+        //  line(o.x, o.y, center.x, center.y);  
+        //}
+      }
     }
     o.move();
     o.display();
