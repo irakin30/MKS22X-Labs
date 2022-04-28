@@ -38,9 +38,11 @@ public class Orb {
     noStroke(); 
     fill(c); 
     ellipse(x, y, radius * 2, radius * 2); 
-    stroke(5); 
-    fill(0); 
-    line(x, y, x + (xSpeed * 3), y + (ySpeed * 3));
+    if (lineMode) {
+      stroke(5); 
+      fill(0); 
+      line(x, y, x + (xSpeed * 3), y + (ySpeed * 3));
+    }
   }
 
   void move() {
@@ -55,7 +57,7 @@ public class Orb {
         ySpeed *= -1;
       }
     } 
-    
+
     //PART 2
     //change the x based on the xSpeed
     //change the y based on the ySpeed 
@@ -76,13 +78,13 @@ public class Orb {
     other.xSpeed += G * (x - other.x) / pow(dist(x, y, other.x, other.y), 2); 
     other.ySpeed += G * (y - other.y) / pow(dist(x, y, other.x, other.y), 2);
   }
-  
+
   void attractSpring(Orb other) {
     float distance = dist(x, y, other.x, other.y); 
     float force = (distance - SPRING_LENGTH) * SPRING_CONSTANT; 
-    xSpeed += force * (x - other.x) / distance; 
-    ySpeed += force * (y - other.y) / distance; 
-    xSpeed *= SPRING_DAMPEN; 
-    ySpeed *= SPRING_DAMPEN; 
+    other.xSpeed += force * (x - other.x) / distance; 
+    other.ySpeed += force * (y - other.y) / distance; 
+    other.xSpeed *= SPRING_DAMPEN; 
+    other.ySpeed *= SPRING_DAMPEN;
   }
 }

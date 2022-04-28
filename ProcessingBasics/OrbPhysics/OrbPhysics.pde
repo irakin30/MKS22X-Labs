@@ -1,17 +1,21 @@
 ArrayList<Orb>orbList;
 Orb center; 
 int MODE; 
-int GRAVITY, ORBIT, SPRING; 
+final int GRAVITY = 0; 
+final int ORBIT = 1; 
+final int SPRING = 2; 
 boolean backgroundMode; 
 boolean gravity; 
+boolean lineMode; 
+final float SPRING_CONSTANT = 0.045;
+final float SPRING_LENGTH = 150;  
+final float SPRING_DAMPEN = 0.99;
 
 void setup() {
   size(1000, 800);
-  GRAVITY = 0; 
-  ORBIT = 1;
-  SPRING = 2; 
   backgroundMode = true; 
   gravity = true; 
+  lineMode = true; 
   MODE = GRAVITY;
   orbList = new ArrayList<Orb>();
   center = new Orb(width/2, height/2, 0, 0, 5);
@@ -40,6 +44,9 @@ void keyPressed() {
   case 'b':
     backgroundMode = !backgroundMode; 
     break;
+  case 'l':
+    lineMode = !lineMode; 
+    break;
   }
 }
 
@@ -54,6 +61,9 @@ void draw() {
     if (MODE == ORBIT) {
       center.attract(o);
     }
+    if (MODE == SPRING) {
+      center.attractSpring(o);
+    }
     o.move();
     o.display();
   }
@@ -62,14 +72,24 @@ void draw() {
 void drawText() {
   fill(255);
   noStroke(); 
-  rect(0, 0, 175, 100); 
+  rect(0, 0, 175, 120); 
   fill(0);
   text("FrameRate: " + frameRate, 20, 20);
   text("Orbs: " + orbList.size(), 20, 40);
-  if (MODE == GRAVITY) {
-    text("MODE: GRAVITY", 20, 60);
+  String mode = ""; 
+  switch(MODE) {
+  case ORBIT: 
+    mode = "ORBIT"; 
+    break; 
+  case SPRING: 
+    mode = "SPRING"; 
+    break; 
+  case GRAVITY: 
+    mode = "GRAVITY"; 
+    break;
   }
-  if (MODE == ORBIT) {
-    text("MODE : ORBIT", 20, 60);
-  }
+  text("MODE: " + mode, 20, 60);
+  text("gravity? : " + gravity, 20, 80); 
+  text("background? : " + backgroundMode, 20, 100);
+  text("lines? : " + lineMode, 20, 120);
 }
