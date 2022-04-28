@@ -32,7 +32,7 @@ public class MyDeque<E>{
       for (int i = start; i < data.length; i++) {
         ans += data[i] + ", ";
       }  
-      for(int i = 0; i < end - 1; i++) {
+      for(int i = 0; i < end; i++) {
         ans += data[i] + ", ";
       }
     } 
@@ -101,7 +101,7 @@ public class MyDeque<E>{
   public void addLast(E element) {
     if(element == null) throw new NullPointerException(); 
     if (size + 1 > data.length) resize();
-
+    
     if (end + 1 > data.length - 1) {
       data[0] = element;
       end = 0;
@@ -119,8 +119,7 @@ public class MyDeque<E>{
   public E removeFirst() {
       if (size == 0) throw new NoSuchElementException();
       E element = data[start]; 
-      data[start] = null; 
-      start++;
+      data[start++] = null; 
       size--; 
       return element; 
   }
@@ -132,8 +131,7 @@ public class MyDeque<E>{
   public E removeLast() {
     if (size == 0) throw new NoSuchElementException();
     E element = data[end];
-    data[end] = null;
-    end--;
+    data[end--] = null;
     size--;
     return element;
   }
@@ -152,11 +150,19 @@ public class MyDeque<E>{
   /**
    * Returns the last element in the deque without removing the element.
    * @return the last element of the deque
-   * @throws
+   * @throws NoSuchElementException if there are no elements in the deque
   */
 
   public E getLast() {
     if (size == 0) throw new NoSuchElementException(); 
     return data[end]; 
+  }
+
+  public static void main(String[] args) {
+    MyDeque<Integer> test = new MyDeque<Integer>();
+    test.addFirst(7);
+    test.addFirst(1);
+    test.addFirst(2);
+    test.addFirst(3);
   }
 }

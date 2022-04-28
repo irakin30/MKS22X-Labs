@@ -54,7 +54,8 @@ public class Orb {
       if (y + ySpeed >= height - radius || y + ySpeed <= radius) {
         ySpeed *= -1;
       }
-    }
+    } 
+    
     //PART 2
     //change the x based on the xSpeed
     //change the y based on the ySpeed 
@@ -74,5 +75,14 @@ public class Orb {
     float G = 20; 
     other.xSpeed += G * (x - other.x) / pow(dist(x, y, other.x, other.y), 2); 
     other.ySpeed += G * (y - other.y) / pow(dist(x, y, other.x, other.y), 2);
+  }
+  
+  void attractSpring(Orb other) {
+    float distance = dist(x, y, other.x, other.y); 
+    float force = (distance - SPRING_LENGTH) * SPRING_CONSTANT; 
+    xSpeed += force * (x - other.x) / distance; 
+    ySpeed += force * (y - other.y) / distance; 
+    xSpeed *= SPRING_DAMPEN; 
+    ySpeed *= SPRING_DAMPEN; 
   }
 }
