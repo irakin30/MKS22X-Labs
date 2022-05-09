@@ -7,9 +7,9 @@ final int SPRING = 2;
 boolean backgroundMode; 
 boolean gravity; 
 boolean lineMode; 
-final float SPRING_CONSTANT = 0.045;
+final float SPRING_CONSTANT = 0.005;
 final float SPRING_LENGTH = 150;  
-final float SPRING_DAMPEN = 0.99;
+final float SPRING_DAMPEN = 0.995;
 
 void setup() {
   size(1000, 800);
