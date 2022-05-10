@@ -10,6 +10,10 @@ OrbList orbs;
 
 void setup() {
   size(1000, 800);
+  reset(); 
+} 
+
+void reset() {
   orbs = new OrbList();
   SPRING = 2;
   SPRING_LENGTH = 50;
@@ -17,7 +21,7 @@ void setup() {
   SPRING_CONSTANT = 0.015;
   GRAVITY = 0.35; 
   MODE = SPRING;
-} 
+}
 
 void mouseClicked() {
   orbs.add(new OrbNode(mouseX, mouseY, 0, 0, 30));
@@ -50,7 +54,7 @@ void keyPressed() {
     GRAVITY *= 0.95; 
     break;
   case ' ' :
-    orbs = new OrbList(); 
+    reset(); 
     break; 
   }
 }
