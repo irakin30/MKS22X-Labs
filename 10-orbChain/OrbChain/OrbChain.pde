@@ -49,8 +49,12 @@ void keyPressed() {
   case '8' : 
     GRAVITY *= 0.95; 
     break;
+  case ' ' :
+    orbs = new OrbList(); 
+    break; 
   }
 }
+
 void draw() {
   background(255);
   orbs.processAll();
