@@ -27,7 +27,12 @@ public class OrbList {
   } 
   
   void add(int xcor, OrbNode toBeAdded) {
-     return; 
+    OrbNode current = first;  
+    while(xcor < current.x) {
+      current = current.next; //edge case for first and last
+    }
+    
+    return; 
   }
   
   void delete(OrbNode target) {

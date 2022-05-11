@@ -25,6 +25,7 @@ void reset() {
 
 void mouseClicked() {
   orbs.add(new OrbNode(mouseX, mouseY, 0, 0, 30));
+ //orbs.delete(orbs.getNodeAt(mouseX, mouseY));  
 } 
 
 void keyPressed() {
@@ -64,7 +65,3 @@ void draw() {
   orbs.processAll();
   orbs.display();
 } 
-
-void mouseClicked() {
-   orbs.delete(orbs.getNodeAt(mouseX, mouseY));  
-}
