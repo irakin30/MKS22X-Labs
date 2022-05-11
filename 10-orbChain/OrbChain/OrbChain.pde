@@ -63,4 +63,8 @@ void draw() {
   background(255);
   orbs.processAll();
   orbs.display();
+} 
+
+void mouseClicked() {
+   orbs.delete(orbs.getNodeAt(mouseX, mouseY));  
 }
