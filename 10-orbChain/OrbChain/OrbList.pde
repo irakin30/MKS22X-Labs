@@ -32,6 +32,12 @@ public class OrbList {
   
   void delete(OrbNode target) {
     if (target == null) return; 
+    if (target == first || target == last) return;
+    
+    (target.prev).next = target.next; 
+    (target.next).prev = target.prev; 
+    
+    target = null; 
   } 
   
   OrbNode getNodeAt(int x, int y) { 
